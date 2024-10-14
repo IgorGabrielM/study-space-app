@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../models/user.model';
-import { jwtDecode } from 'jwt-decode';
 
 export class AuthModel {
   email: string;

@@ -1,0 +1,41 @@
+<ion-content>
+  <div class="particle" *ngFor="let particle of particles" [ngStyle]="{'transform': 'translate(' + particle.x + 'px, ' + particle.y + 'px)'}"></div>
+
+  <div class="h-screen w-screen bg-cover bg-center flex flex-col justify-center">
+    <div class="h-fit -mt-32 z-10">
+      <ion-title class="text-4xl text-center font-bold text-white mb-6 font-sans">Fazer login</ion-title>
+        <div class="w-11/12 mx-auto px-5 py-5 h-fit flex flex-col gap-2 rounded-md shadow-lg border border-primary bg-secondary">
+          <ion-input
+            type="email"
+            fill="solid"
+            label="Email"
+            labelPlacement="floating"
+            [(ngModel)]="user.email"
+            class="custom"
+            required
+          ></ion-input>
+          <ion-input
+            type="password"
+            fill="solid"
+            label="Senha"
+            labelPlacement="floating"
+            [(ngModel)]="user.password"
+            class="custom"
+            required
+          ></ion-input>
+
+          <ion-button [disabled]="!(user.email?.length > 2 && user.password?.length > 2)" (click)="onSubmit()">
+            <span class="font-bold text-white">
+              Entrar
+            </span>
+          </ion-button>
+          <p class="text-primary text-sm">
+            Não possui conta?
+            <span class="font-bold cursor-pointer" routerLink="./sign-up">
+              Crie uma clicando aqui
+            </span>
+          </p>
+        </div>
+      </div>
+  </div>
+</ion-content>
