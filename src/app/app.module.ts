@@ -11,6 +11,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {AuthService} from "./data/services/auth.service";
 import {CommonModule} from "@angular/common";
 import {SignInPageModule} from "./sign-in/sign-in.module";
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +24,7 @@ import {SignInPageModule} from "./sign-in/sign-in.module";
     IonicModule.forRoot(),
     AppRoutingModule,
     SignUpPageModule,
-    SignInPageModule
+    SignInPageModule,
   ],
   providers: [
     {
@@ -29,6 +32,8 @@ import {SignInPageModule} from "./sign-in/sign-in.module";
       useClass: IonicRouteStrategy
     },
     AuthService,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
   ],
   bootstrap: [AppComponent],
 })
