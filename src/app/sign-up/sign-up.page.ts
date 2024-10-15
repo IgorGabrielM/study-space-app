@@ -2,9 +2,11 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthModel, AuthService} from "../data/services/auth.service";
 import {UserModel} from "../data/models/user.model";
 import {Router} from "@angular/router";
-import {ToastController} from "@ionic/angular";
+import {AlertController, LoadingController, ToastController} from "@ionic/angular";
 import {InterestModel} from "../data/models/interest.model";
 import {InterestService} from "../data/services/insterest.service";
+import {FileSystemImageService} from "../data/services/file-system-image.service";
+import {ImageService} from "../data/services/image.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -21,6 +23,10 @@ export class SignUpPage implements OnInit {
   constructor(
     private authService: AuthService,
     private interestService: InterestService,
+    private alertController: AlertController,
+    private fileSystemImageService: FileSystemImageService,
+    private imageService: ImageService,
+    private loadingCtrl: LoadingController,
     private router: Router,
   ) { }
 
@@ -68,6 +74,61 @@ export class SignUpPage implements OnInit {
         p.dy += dy * 0.01;
       }
     });
+  }
+
+  async selectImage(){
+    const loading = await this.loadingCtrl.create({
+      message: 'Fazendo upload da imagem. Por favor aguarde...',
+    });
+
+    const alert = await this.alertController.create({
+      header: 'Escolha de foto de usuário',
+      message: 'Selecione uma opção:',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: () => {
+            this.fileSystemImageService.getPhoto('camera').then((image) => {
+              loading.present()
+              fetch(`data:image/png;base64,${image.base64Image}`)
+                .then((res) => res.blob())
+                .then((blob) => {
+                  this.imageService.uploadImageBlob(blob, 'tickets').then((res) => {
+                    this.user.imageUrl = res
+                    setTimeout(() => {
+                      loading.dismiss()
+                    }, 500)
+                  })
+                })
+            })
+          }
+        },
+        {
+          text: 'Galeria',
+          handler: () => {
+            this.fileSystemImageService.getPhoto('gallery').then((image) => {
+              loading.present()
+              fetch(`data:image/png;base64,${image.base64Image}`)
+                .then((res) => res.blob())
+                .then((blob) => {
+                  this.imageService.uploadImageBlob(blob, 'tickets').then((res) => {
+                    this.user.imageUrl = res
+                    setTimeout(() => {
+                      loading.dismiss()
+                    }, 500)
+                  })
+                })
+            })
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: "cancel"
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   onSubmit() {

@@ -14,6 +14,7 @@ import {SignInPageModule} from "./sign-in/sign-in.module";
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import {environment} from "../environments/environment";
+import {StorageModule} from "@angular/fire/storage";
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import {environment} from "../environments/environment";
     AppRoutingModule,
     SignUpPageModule,
     SignInPageModule,
+    StorageModule
   ],
   providers: [
     {
