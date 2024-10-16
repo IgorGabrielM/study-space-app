@@ -14,6 +14,14 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'roadmap',
+    loadChildren: () => import('./roadmap/roadmap.module').then( m => m.RoadmapPageModule)
+  },
 ];
 @NgModule({
   imports: [

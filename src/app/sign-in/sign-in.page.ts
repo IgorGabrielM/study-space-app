@@ -64,7 +64,7 @@ export class SignInPage implements OnInit {
       .then((res) => {
         localStorage.setItem('userToken', res.token.access_token);
         localStorage.setItem('userId', res.user.idUser);
-        this.router.navigate(['../home']);
+        this.router.navigate(['./tabs/home']);
       })
       .catch(async () => {
         const toast = await this.toastController.create({

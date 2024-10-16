@@ -1,0 +1,27 @@
+<div class="pt-1 w-full h-full bg-secondary" (click)="deselectInput($event)">
+  <div class="w-full h-fit py-2 border-b border-primary flex flex-col gap-2 justify-center items-center relative">
+    <span class="w-fit text-primary text-center font-bold">Comentários</span>
+    <ion-icon class="absolute right-2 top-1 text-2xl text-primary" name="close-circle" (click)="closeDialog()"></ion-icon>
+  </div>
+
+  <div class="w-full flex flex-col gap-4">
+    <div *ngFor="let comment of post.comments" class="w-full flex px-3 py-3">
+      <img *ngIf="comment?.user?.imageUrl.length > 0" [src]="comment?.user?.imageUrl" alt="Imagem do usuário"
+           class="rounded-xl w-10 h-10 object-cover">
+      <img *ngIf="comment?.user?.imageUrl.length == 0 || !comment.user"
+           src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+           alt="Imagem do usuário" class="rounded-xl border border-gray-300 w-10 h-10 object-cover">
+      <div class="flex flex-col ml-3 text-sm">
+        <span class="truncate w-40 text-gray-400">{{ comment?.user?.name }}</span>
+        <span class="w-full h-fit text-white">{{ comment?.text }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div  class="w-full h-fit bg-dark p-2 text-white fixed bottom-0 flex justify-between items-center">
+    <ion-input #inputElement id="comment" placeholder="Adicione um comentário..." [(ngModel)]="commentText" (click)="selectInput($event)"/>
+    <button (click)="sendComment()" [disabled]="!commentText || commentText.length <= 0" class="bg-primary disabled:opacity-50 w-10 h-10 rounded-lg flex justify-center items-center">
+      <ion-icon name="send" class="text-xl"></ion-icon>
+    </button>
+  </div>
+</div>

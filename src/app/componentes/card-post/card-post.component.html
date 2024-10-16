@@ -1,0 +1,41 @@
+<div class="w-full h-fit p-5 rounded-lg shadow-md bg-secondary border-2 border-gray-400">
+  <div class="w-full h-full flex justify-around mt-1 mb-3">
+    <div class="w-full flex items-center gap-2">
+      <img *ngIf="post?.user?.imageUrl?.length > 0" [src]="post?.user?.imageUrl" alt="Imagem do usuário"
+           class="rounded-full w-14 h-14 object-cover">
+      <img *ngIf="post?.user?.imageUrl?.length == 0"
+           src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+           alt="Imagem do usuário" class="rounded-full w-14 h-14 object-cover">
+      <div>
+        <span class="text-primary font-bold" [routerLink]="['user']">{{ post?.user?.name }}</span>
+      </div>
+    </div>
+    <div class="w-full h-12 lg:flex text-sm justify-end items-end text-end text-gray-600">
+      <span>{{ post.createdAt | date:'dd/MM/yyyy HH:mm'}}</span>
+    </div>
+  </div>
+  <h4 class="text-lg font-bold text-white">{{ post.title }}</h4>
+  <p class="text-gray-400 mt-2">{{ post.text }}</p>
+  <img *ngIf="post.imageUrl" [src]="post.imageUrl" class="rounded-md mt-2" alt="Imagme do post">
+
+  <div class="flex gap-2 overflow-x-auto mt-2" *ngIf="post.interests && post.interests.length">
+    <div *ngFor="let interest of post.interests" class="px-3 py-1 rounded-md text-white bg-blue-600">
+      <span>{{ interest.text }}</span>
+    </div>
+  </div>
+
+  <div class="pt-2 flex gap-5 mx-4 border-t border-gray-300 mt-2 text-white">
+    <div class="flex gap-2 items-center cursor-pointer" (click)="addLike()">
+      <ion-icon *ngIf="!isLiked()" name="heart-outline" class="text-2xl text-white"></ion-icon>
+      <ion-icon *ngIf="isLiked()" name="heart" class="text-2xl text-white"></ion-icon>
+    </div>
+    <div (click)="openCommentDialog()">
+      <div class="flex gap-2 items-center relative cursor-pointer">
+        <ion-icon name="chatbubble-outline" class="text-2xl text-white"></ion-icon>
+        <div class="w-5 h-5 flex justify-center items-center text-sm rounded-full bg-primary absolute top-0 -right-5">
+          <span class="text-white">{{ post.commentsCount }}</span>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
