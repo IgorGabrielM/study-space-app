@@ -41,12 +41,6 @@
           class="custom"
           required
         ></ion-input>
-        <ion-textarea
-          label="Biografia"
-          labelPlacement="floating"
-          class="custom"
-          required
-        ></ion-textarea>
         <ion-input
           type="date"
           fill="solid"
@@ -56,18 +50,28 @@
           class="custom"
           required
         ></ion-input>
-
-        <ion-select placeholder="Selecione um genêro" interface="popover" fill="outline">
+        <ion-textarea
+          label="Biografia"
+          labelPlacement="floating"
+          class="custom border border-[#595959] rounded-[4px] px-2"
+          required
+        ></ion-textarea>
+        <ion-select placeholder="Selecione um genêro" interface="popover" fill="outline" [(ngModel)]="user.gender">
           <ion-select-option value="male">Masculino</ion-select-option>
           <ion-select-option value="female">Feminino</ion-select-option>
           <ion-select-option value="other">Outro</ion-select-option>
         </ion-select>
 
-        <ion-select placeholder="Selecione seus intereses" interface="action-sheet" fill="outline" [multiple]="true">
+<!--        <ion-select placeholder="Selecione seus intereses" interface="action-sheet" fill="outline" [multiple]="true">
           <ion-select-option *ngFor="let interest of interests" [value]="interest.idInterest">{{ interest.text }}</ion-select-option>
-        </ion-select>
+        </ion-select>-->
 
-        <ion-button [disabled]="!(user.email?.length > 2 && user.password?.length > 2)" (click)="onSubmit()">
+        <ion-button [disabled]="!(
+        user.email?.length > 2 &&
+        user.name?.length > 2 &&
+        user.password?.length > 2 &&
+        user.gender
+        )" (click)="onSubmit()">
             <span class="font-bold text-white">
               Criar
             </span>

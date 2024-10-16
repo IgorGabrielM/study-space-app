@@ -32,7 +32,7 @@ export class SignUpPage implements OnInit {
 
   ngOnInit() {
     this.user = new UserModel()
-    this.loadInterests();
+    //this.loadInterests();
 
     for (let i = 0; i < this.particleCount; i++) {
       this.particles.push({
@@ -45,11 +45,13 @@ export class SignUpPage implements OnInit {
     this.animateParticles();
   }
 
+/*
   loadInterests() {
     this.interestService.list().then((res) => {
       this.interests = res
     });
   }
+*/
 
 
   animateParticles() {
@@ -141,7 +143,7 @@ export class SignUpPage implements OnInit {
       ],
       posts: []
     }).then((res) => {
-      this.router.navigate(['../sign-in'])
+      this.router.navigate(['../'])
     })
   }
 }
