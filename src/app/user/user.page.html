@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>user</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">user</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="w-full h-fit flex justify-center bg-secondary pt-8">
+    <div class="text-white flex flex-col gap-2 items-center">
+      <img
+        *ngIf="user?.imageUrl.length > 0"
+        [src]="user?.imageUrl"
+        alt="Imagem do usuário"
+        class="w-[150px] h-[150px] object-cover rounded-xl"
+      />
+      <img
+        *ngIf="user?.imageUrl.length == 0"
+        src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+        alt="Imagem do usuário"
+        class="w-[150px] h-[150px] object-cover rounded-xl"
+      />
+
+      <span class="font-bold text-2xl text-primary">{{ user?.name }}</span>
+
+      <div class="flex gap-2">
+        <div
+          *ngFor="let interest of interests"
+          class="px-3 py-1 rounded-full bg-white bg-opacity-40"
+        >
+          <span class="font-bold uppercase">{{ interest.text }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="w-full h-fit min-h-full bg-secondary pt-4 pb-20">
+    <div class="w-11/12 lg:w-3/5 mx-auto">
+      <div class="w-full h-fit flex flex-col gap-2">
+        <h3 class="text-xl text-white font-bold">Biografia</h3>
+        <p class="w-full flex flex-col p-4 justify-content-center border-2 border-gray-400 rounded-md text-gray-400">
+          {{ user?.bio }}
+        </p>
+      </div>
+
+      <div class="w-full h-fit flex flex-col gap-2 mt-8">
+        <h3 class="text-xl text-white font-bold">Minhas conquistas</h3>
+        <div class="w-full flex flex-col p-4 justify-content-center border-2 border-gray-400 rounded-md text-gray-400">
+          <div class="mt-2 flex flex-col gap-2">
+            <div *ngIf="cursos?.length === 0" class="text-white font-bold">
+              <span>Nenhum curso do usuário...</span>
+            </div>
+            <div *ngIf="cursos?.length > 0">
+              <div *ngFor="let curso of cursos" class="text-white">
+                <img *ngIf="curso.imageUrl" [src]="curso.imageUrl" class="rounded-md mt-2" alt="Imagme do curso">
+                <p class="text-lg font-bold">{{ curso.type }} - {{ curso.institution }}</p>
+                <p class="text-sm">{{ curso.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="user?.posts"
+           class="w-full h-fit flex flex-col gap-2 mt-8">
+        <span class="text-xl text-white font-bold">Últimos posts</span>
+        <div class="w-full flex flex-col gap-5">
+          <app-card-post *ngFor="let post of user.posts" [post]="post"></app-card-post>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="exit()">
+    <ion-fab-button color="danger">
+      <ion-icon name="log-out" class="text-black"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

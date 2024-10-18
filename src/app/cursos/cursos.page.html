@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Conquistas dos alunos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="w-full h-fit min-h-full flex bg-secondary">
+    <div class="w-full flex gap-5 bg-secondary">
+      <div class="w-11/12 mx-auto mb-2">
+        <div class="w-full h-fit mx-auto">
+          <ion-button
+            class="w-full mt-2 flex justify-center text-white items-center" (click)="openDialogMedia()">
+            <ion-icon name="add-circle" class="text-xl"></ion-icon>
+            <span class="font-bold ml-2">Curso</span>
+          </ion-button>
+
+          <div class="w-full h-fit flex flex-col gap-2">
+            <div class="w-full flex flex-col justify-content-center  rounded-md text-gray-400 mt-2 ">
+              <div class="flex flex-col gap-4">
+                <div *ngIf="cursos.length === 0" class="text-white font-bold">
+                  <span>Nenhum curso...</span>
+                </div>
+                <div *ngFor="let curso of cursos" class="text-white border-2 border-gray-400 p-2 rounded-lg">
+                  <div class="flex justify-between items-center mx-1">
+                    <p class="text-lg font-bold">{{ curso.type }} - {{ curso.institution }}</p>
+                    <div>
+                      <img *ngIf="curso.users[0]?.user?.imageUrl?.length == 0"
+                           src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+                           alt="Imagem do usuário" class="rounded-full w-10 h-10 object-cover">
+                      <img *ngIf="curso.users[0]?.user?.imageUrl?.length > 0" [src]="curso.users[0].user.imageUrl" class="rounded-full w-10 h-10 object-cover" alt="Imagem de usuário">
+                    </div>
+                  </div>
+                  <img *ngIf="curso.imageUrl" [src]="curso.imageUrl" class="rounded-md mt-2" alt="Imagme do curso">
+                  <p class="text-sm text-gray-200 mt-2 mx-1">{{ curso.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
