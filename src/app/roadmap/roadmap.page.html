@@ -5,10 +5,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">roadmap</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <menu-tabs></menu-tabs>
+  <div class="w-full h-fit min-h-full flex bg-secondary">
+    <div class="w-full flex gap-5 mt-5 bg-secondary">
+      <div class="w-11/12 mx-auto mb-2">
+          <div class="w-full flex gap-4 mb-5">
+            <div *ngFor="let simpleRoadmap of simpleRoadmaps" (click)="selectRoadMap(simpleRoadmap.id)" [class]="'border-2 border-primary px-3 py-2 cursor-pointer rounded-lg flex gap-2 items-center ' + (roadMapSelected && roadMapSelected.id === simpleRoadmap.id ? 'bg-primary' : 'bg-secondary')">
+              <img *ngIf="simpleRoadmap?.imageUrl?.length > 0" [src]="simpleRoadmap?.imageUrl" alt="Icone da linguagem"
+                   class="rounded-md w-8 h-8 object-cover">
+              <span class="text-white font-semibold">{{ simpleRoadmap.name }}</span>
+            </div>
+          </div>
+
+          <div class="w-full h-full">
+            <div #diagramDiv id="diagramDiv" style="width:100%; height:60vh;" class="bg-gray-700 border-2 border-gray-400 rounded-lg"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 </ion-content>
