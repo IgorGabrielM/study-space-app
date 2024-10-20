@@ -54,6 +54,7 @@
           label="Biografia"
           labelPlacement="floating"
           class="custom border border-[#595959] rounded-[4px] px-2"
+          [(ngModel)]="user.bio"
           required
         ></ion-textarea>
         <ion-select placeholder="Selecione um genêro" interface="popover" fill="outline" [(ngModel)]="user.gender">
@@ -69,6 +70,7 @@
         <ion-button [disabled]="!(
         user.email?.length > 2 &&
         user.name?.length > 2 &&
+        user.bio?.length > 2 &&
         user.password?.length > 2 &&
         user.gender
         )" (click)="onSubmit()">

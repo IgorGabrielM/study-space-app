@@ -2,7 +2,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {UserModel} from "../data/models/user.model";
 import {AuthModel, AuthService} from "../data/services/auth.service";
 import {Router} from "@angular/router";
-import {ToastController} from "@ionic/angular";
+import {LoadingController, ToastController} from "@ionic/angular";
 
 @Component({
   selector: 'app-sign-in',
@@ -18,7 +18,8 @@ export class SignInPage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -59,12 +60,17 @@ export class SignInPage implements OnInit {
     });
   }
 
-   onSubmit() {
+   async onSubmit() {
+     const loading = await this.loadingCtrl.create({
+       message: 'Fazendo login...',
+     });
+     loading.present();
     this.authService.auth(this.user)
       .then((res) => {
         localStorage.setItem('userToken', res.token.access_token);
         localStorage.setItem('userId', res.user.idUser);
         this.router.navigate(['/home']);
+        loading.dismiss();
       })
       .catch(async () => {
         const toast = await this.toastController.create({
@@ -73,7 +79,7 @@ export class SignInPage implements OnInit {
           position: 'bottom',
           color: 'danger'
         });
-
+        loading.dismiss();
         await toast.present();
       });
   }
