@@ -24,7 +24,7 @@
       <ion-header [translucent]="true">
         <ion-toolbar>
           <ion-title>Criar post</ion-title>
-          <ion-icon name="close-circle" slot="end" class="text-2xl mr-4"></ion-icon>
+          <ion-icon (click)="changeModal(false)" name="close-circle" slot="end" class="text-2xl mr-4"></ion-icon>
         </ion-toolbar>
       </ion-header>
       <ion-content>
@@ -43,6 +43,7 @@
           labelPlacement="floating"
           class="custom border border-[#595959] rounded-[4px] px-2"
           [(ngModel)]="post.text"
+          rows="8"
           required
         ></ion-textarea>
 

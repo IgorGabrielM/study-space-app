@@ -98,7 +98,11 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  onSubmit(){
+  async onSubmit(){
+    const loading = await this.loadingCtrl.create({
+      message: 'Fazendo upload da postagem. Por favor aguarde...',
+    });
+    loading.present()
     const userId = Number(localStorage.getItem('userId'));
     const payload = {
       ...this.post,
@@ -109,6 +113,7 @@ export class HomePage implements OnInit {
 
     this.postService.createPost(payload).then(() => {
       this.modalIsOpen = false;
+      loading.dismiss()
     })
   }
 
