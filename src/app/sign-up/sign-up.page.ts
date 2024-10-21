@@ -133,7 +133,11 @@ export class SignUpPage implements OnInit {
     await alert.present();
   }
 
-  onSubmit() {
+  async onSubmit() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Criando usuário. Por favor aguarde...',
+    });
+    loading.present()
     this.authService.createUser({
       ...this.user,
       idRole: 0,
@@ -143,6 +147,7 @@ export class SignUpPage implements OnInit {
       ],
       posts: []
     }).then((res) => {
+      loading.dismiss()
       this.router.navigate(['../'])
     })
   }

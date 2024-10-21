@@ -5,6 +5,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="scanQRCode()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div>
+    <ion-input #textInput placeholder="Enter text" type="text"></ion-input>
+    <ion-button (click)="generateQRCode(textInput.value)">Generate QR Code</ion-button>
+    <img *ngIf="qrCodeDataUrl" [src]="qrCodeDataUrl" />
+  </div>
+
   <div class="w-full h-fit min-h-full flex bg-secondary">
     <div class="w-full flex gap-5 bg-secondary">
       <div class="w-11/12 mx-auto mb-2">
@@ -35,5 +47,8 @@
       </div>
     </div>
   </div>
+
+
+
 
 </ion-content>
