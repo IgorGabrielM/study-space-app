@@ -11,4 +11,6 @@ export class MediaModel {
     users?: any[];
     interestIds?: number[];
     idUser?: number;
+    link?: string;
+  idMedia?: number;
 }
