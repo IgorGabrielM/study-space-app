@@ -35,6 +35,7 @@ export class UserPage implements OnInit {
     const userToken = localStorage.getItem('userId');
     this.authService.find(userToken).then(async (usr) => {
       this.user = usr;
+      console.log(usr);
 
       this.user.posts = this.user.posts.map((post) => {
         return {
