@@ -13,18 +13,23 @@
 
   <div class="w-full h-fit flex justify-center bg-secondary pt-8">
     <div class="text-white flex flex-col gap-2 items-center">
-      <img
-        *ngIf="user?.imageUrl.length > 0"
-        [src]="user?.imageUrl"
-        alt="Imagem do usuário"
-        class="w-[150px] h-[150px] object-cover rounded-xl"
-      />
-      <img
-        *ngIf="user?.imageUrl.length == 0"
-        src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
-        alt="Imagem do usuário"
-        class="w-[150px] h-[150px] object-cover rounded-xl"
-      />
+      <div class="relative">
+        <img
+          *ngIf="user?.imageUrl.length > 0"
+          [src]="user?.imageUrl"
+          alt="Imagem do usuário"
+          [class]="('w-[150px] h-[150px] object-cover rounded-xl border-4 ' + borderRankClass)"
+        />
+        <img
+          *ngIf="user?.imageUrl.length == 0"
+          src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+          alt="Imagem do usuário"
+          class="w-[150px] h-[150px] object-cover rounded-xl"
+        />
+        <div [class]="('w-8 h-8 absolute -bottom-2 -right-2 flex justify-center items-center rounded-full ' + bgRankClass)">
+          <ion-icon name="medal" class="text-white text-xl mt-1"></ion-icon>
+        </div>
+      </div>
 
       <span class="font-bold text-2xl text-primary">{{ user?.name }}</span>
 

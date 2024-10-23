@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserModel} from "../data/models/user.model";
 import {PostModel} from "../data/models/post.model";
@@ -18,12 +18,15 @@ export class UserPage implements OnInit {
   posts: PostModel[] = [];
   interests: InterestModel[] = [];
   cursos: MediaModel[] = []
+  bgRankClass: string;
+  borderRankClass: string;
 
   constructor(
     private router: Router,
     private interestService: InterestService,
     private authService: AuthService,
     private mediaService: MediaService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -49,6 +52,7 @@ export class UserPage implements OnInit {
       });
 
       this.interests = await Promise.all(interestPromises);
+      this.getRankClass();
     })
   }
 
@@ -65,6 +69,38 @@ export class UserPage implements OnInit {
     localStorage.removeItem('userId');
     localStorage.removeItem('userToken');
     this.router.navigate(['../'])
+    setTimeout(() => {location.reload()}, 500)
   }
+
+  getRankClass() {
+    if (!this.user) {
+      return;
+    }
+
+    switch (true) {
+      case (this.user.userRank >= 0 && this.user.userRank < 10):
+        this.bgRankClass = 'bg-amber-700';
+        this.borderRankClass = 'border-amber-700'
+        break;
+      case (this.user.userRank >= 10 && this.user.userRank < 20):
+        this.bgRankClass = 'bg-gray-400';
+        this.borderRankClass = 'bg-gray-400'
+        break;
+      case (this.user.userRank >= 20 && this.user.userRank < 30):
+        this.bgRankClass = 'bg-amber-400';
+        this.borderRankClass = 'bg-amber-400'
+        break;
+      case (this.user.userRank >= 30):
+        this.bgRankClass = 'bg-emerald-500';
+        this.borderRankClass = 'bg-emerald-500'
+        break;
+      default:
+        this.bgRankClass = 'bg-sky-400';
+        this.borderRankClass = 'bg-sky-400'
+        break;
+    }
+  }
+
+
 
 }

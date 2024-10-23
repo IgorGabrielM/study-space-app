@@ -13,4 +13,5 @@ export class UserModel {
     interests?: number[]
     posts?: PostModel[]
     idUser: number
+    userRank?: number
 }

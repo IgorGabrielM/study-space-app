@@ -112,6 +112,7 @@ export class HomePage implements OnInit {
     }
 
     this.postService.createPost(payload).then(() => {
+      this.loadPosts();
       this.modalIsOpen = false;
       loading.dismiss()
     })
