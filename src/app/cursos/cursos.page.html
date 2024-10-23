@@ -10,7 +10,7 @@
       <div class="w-11/12 mx-auto mb-2">
         <div class="w-full h-fit mx-auto">
           <ion-button
-            class="w-full mt-2 flex justify-center text-white items-center" (click)="openDialogMedia()">
+            class="w-full mt-2 flex justify-center text-white items-center" (click)="changeModal(true)">
             <ion-icon name="add-circle" class="text-xl"></ion-icon>
             <span class="font-bold ml-2">Curso</span>
           </ion-button>
@@ -43,4 +43,55 @@
     </div>
   </div>
 
+  <ion-modal [isOpen]="modalIsOpen" (didDismiss)="changeModal(false)">
+    <ng-template>
+      <ion-header [translucent]="true">
+        <ion-toolbar>
+          <ion-title>Criar Curso</ion-title>
+          <ion-icon (click)="changeModal(false)" name="close-circle" slot="end" class="text-2xl mr-4"></ion-icon>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="flex flex-col gap-2 p-[16px]">
+          <ion-input
+            type="text"
+            fill="solid"
+            label="Título"
+            labelPlacement="floating"
+            [(ngModel)]="curso.title"
+            class="custom"
+            required
+          ></ion-input>
+          <ion-input
+            type="text"
+            fill="solid"
+            label="Instituição"
+            labelPlacement="floating"
+            [(ngModel)]="curso.institution"
+            class="custom"
+            required
+          ></ion-input>
+          <ion-textarea
+            label="Descrição do curso"
+            labelPlacement="floating"
+            class="custom border border-[#595959] rounded-[4px] px-2"
+            [(ngModel)]="curso.description"
+            rows="8"
+            required
+          ></ion-textarea>
+
+          <div (click)="selectImage()" class="w-full h-52 mx-auto my-2 flex justify-center items-center border-2 border-gray-400 rounded-lg relative">
+            <ion-icon *ngIf="!curso.imageUrl" name="image" class="text-9xl"></ion-icon>
+            <img *ngIf="curso.imageUrl" [src]="curso.imageUrl" class="w-full h-full rounded-lg object-cover">
+            <div  class="absolute bg-primary -bottom-3 -right-3 w-7 h-7 rounded-full text-white flex justify-center ion-text-center">
+              <ion-icon name="pencil" class="text-md mt-1.5"></ion-icon>
+            </div>
+          </div>
+
+          <ion-button fill="outline" (click)="changeModal(false)">Cancelar</ion-button>
+          <ion-button (click)="onSubmit()" class="font-bold">Enviar</ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
