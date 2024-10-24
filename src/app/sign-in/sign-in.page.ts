@@ -1,5 +1,4 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {UserModel} from "../data/models/user.model";
 import {AuthModel, AuthService} from "../data/services/auth.service";
 import {Router} from "@angular/router";
 import {LoadingController, ToastController} from "@ionic/angular";

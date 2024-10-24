@@ -32,6 +32,10 @@ const routes: Routes = [
     path: 'materiais',
     loadChildren: () => import('./materiais/materiais.module').then( m => m.MateriaisPageModule)
   },
+  {
+    path: 'sign-up-simpilify',
+    loadChildren: () => import('./sign-up-simpilify/sign-up-simpilify.module').then( m => m.SignUpSimpilifyPageModule)
+  },
 ];
 @NgModule({
   imports: [

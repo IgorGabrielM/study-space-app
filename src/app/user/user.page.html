@@ -57,13 +57,13 @@
 
       <div class="w-full h-fit flex flex-col gap-2 mt-8">
         <h3 class="text-xl text-white font-bold">Minhas conquistas</h3>
-        <div class="w-full flex flex-col p-4 justify-content-center border-2 border-gray-400 rounded-md text-gray-400">
+        <div class="w-full flex flex-col  justify-content-center gap-2 text-gray-400">
           <div class="mt-2 flex flex-col gap-2">
             <div *ngIf="cursos?.length === 0" class="text-white font-bold">
               <span>Nenhum curso do usuário...</span>
             </div>
-            <div *ngIf="cursos?.length > 0">
-              <div *ngFor="let curso of cursos" class="text-white">
+            <div *ngIf="cursos?.length > 0" class="flex flex-col gap-4">
+              <div *ngFor="let curso of cursos" class="text-white border-2 p-4 rounded-md border-gray-400">
                 <img *ngIf="curso.imageUrl" [src]="curso.imageUrl" class="rounded-md mt-2" alt="Imagme do curso">
                 <p class="text-lg font-bold">{{ curso.type }} - {{ curso.institution }}</p>
                 <p class="text-sm">{{ curso.description }}</p>
@@ -74,7 +74,7 @@
       </div>
 
       <div *ngIf="user?.posts"
-           class="w-full h-fit flex flex-col gap-2 mt-8">
+           class="w-full h-fit flex flex-col gap-3 mt-8">
         <span class="text-xl text-white font-bold">Últimos posts</span>
         <div class="w-full flex flex-col gap-5">
           <app-card-post *ngFor="let post of user.posts" [post]="post"></app-card-post>
