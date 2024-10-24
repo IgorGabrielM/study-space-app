@@ -20,6 +20,8 @@ export class UserPage implements OnInit {
   cursos: MediaModel[] = []
   bgRankClass: string;
   borderRankClass: string;
+  textRankClass: string;
+  nameRank: string;
 
   constructor(
     private router: Router,
@@ -80,23 +82,33 @@ export class UserPage implements OnInit {
     switch (true) {
       case (this.user.userRank >= 0 && this.user.userRank < 10):
         this.bgRankClass = 'bg-amber-700';
-        this.borderRankClass = 'border-amber-700'
+        this.borderRankClass = 'border-amber-700';
+        this.textRankClass = 'text-amber-700';
+        this.nameRank = 'Bronze';
         break;
       case (this.user.userRank >= 10 && this.user.userRank < 20):
         this.bgRankClass = 'bg-gray-400';
-        this.borderRankClass = 'bg-gray-400'
+        this.borderRankClass = 'bg-gray-400';
+        this.textRankClass = 'text-gray-400';
+        this.nameRank = 'Prata';
         break;
       case (this.user.userRank >= 20 && this.user.userRank < 30):
         this.bgRankClass = 'bg-amber-400';
-        this.borderRankClass = 'bg-amber-400'
+        this.borderRankClass = 'bg-amber-400';
+        this.textRankClass = 'text-amber-400';
+        this.nameRank = 'Ouro';
         break;
       case (this.user.userRank >= 30):
         this.bgRankClass = 'bg-emerald-500';
-        this.borderRankClass = 'bg-emerald-500'
+        this.borderRankClass = 'bg-emerald-500';
+        this.textRankClass = 'text-emerald-500';
+        this.nameRank = 'Esmeralda';
         break;
       default:
         this.bgRankClass = 'bg-sky-400';
-        this.borderRankClass = 'bg-sky-400'
+        this.borderRankClass = 'bg-sky-400';
+        this.textRankClass = 'text-sky-400';
+        this.nameRank = 'Diamante';
         break;
     }
   }

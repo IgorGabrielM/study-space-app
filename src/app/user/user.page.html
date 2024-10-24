@@ -13,6 +13,7 @@
 
   <div class="w-full h-fit flex justify-center bg-secondary pt-8">
     <div class="text-white flex flex-col gap-2 items-center">
+      <span [class]="'w-9/12 mx-auto text-end font-bold text-sm -mb-2 ' + textRankClass">{{ nameRank }}</span>
       <div class="relative">
         <img
           *ngIf="user?.imageUrl.length > 0"
