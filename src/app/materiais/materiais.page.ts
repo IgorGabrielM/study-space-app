@@ -13,7 +13,7 @@ import {RecursoModel} from "../data/models/recurso.model";
 export class MateriaisPage implements OnInit {
   materiais: MediaModel[] = [];
   qrCodeDataUrl: string;
-  valueSegment: 'Materiais' | 'Conteudos' = 'Conteudos'
+  valueSegment: 'Materiais' | 'Conteudos' = 'Materiais'
   recursos: RecursoModel[] = []
 
   constructor(
