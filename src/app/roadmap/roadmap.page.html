@@ -1,25 +1,37 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>roadmap</ion-title>
+    <ion-title class="font-bold">Roadmaps</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="w-full h-fit min-h-full flex bg-secondary">
-    <div class="w-full flex gap-5 mt-5 bg-secondary">
+  <div class="w-full h-fit min-h-full bg-secondary pb-4">
+    <div class="w-full flex gap-5 pt-5 bg-secondary">
       <div class="w-11/12 mx-auto mb-2">
-          <div class="w-full flex gap-4 mb-5">
-            <div *ngFor="let simpleRoadmap of simpleRoadmaps" (click)="selectRoadMap(simpleRoadmap.id)" [class]="'border-2 border-primary px-3 py-2 cursor-pointer rounded-lg flex gap-2 items-center ' + (roadMapSelected && roadMapSelected.id === simpleRoadmap.id ? 'bg-primary' : 'bg-secondary')">
-              <img *ngIf="simpleRoadmap?.imageUrl?.length > 0" [src]="simpleRoadmap?.imageUrl" alt="Icone da linguagem"
-                   class="rounded-md w-8 h-8 object-cover">
-              <span class="text-white font-semibold">{{ simpleRoadmap.name }}</span>
-            </div>
+        <div class="w-full flex gap-4 mb-5">
+          <div *ngFor="let simpleRoadmap of simpleRoadmaps" (click)="selectRoadMap(simpleRoadmap.id)" [class]="'border-2 border-primary px-3 py-2 cursor-pointer rounded-lg flex gap-2 items-center ' + (roadMapSelected && roadMapSelected.id === simpleRoadmap.id ? 'bg-primary' : 'bg-secondary')">
+            <img *ngIf="simpleRoadmap?.imageUrl?.length > 0" [src]="simpleRoadmap?.imageUrl" alt="Icone da linguagem"
+                 class="rounded-md w-8 h-8 object-cover">
+            <span class="text-white font-semibold">{{ simpleRoadmap.name }}</span>
           </div>
+        </div>
 
-          <div class="w-full h-full">
-            <div #diagramDiv id="diagramDiv" style="width:100%; height:85%;" class="bg-gray-700 border-2 border-gray-400 rounded-lg"></div>
-          </div>
+        <div class="w-full h-96">
+          <div #diagramDiv id="diagramDiv" style="width:100%; height:100%;" class="bg-gray-700 border-2 border-gray-400 rounded-lg"></div>
         </div>
       </div>
     </div>
+    <div class="mt-2 mx-4 border border-gray-400 p-2 rounded-md">
+      <p class="font-bold text-white text-xl font-sans text-center mb-2">Os Benefícios de Estudar Seguindo um Roadmap</p>
+      <p class="text-gray-50 font-sans text-sm">
+        Seguir um roadmap de estudos é uma estratégia poderosa para alcançar seus objetivos acadêmicos e profissionais. Primeiramente, um roadmap bem estruturado ajuda a manter o foco ao delinear claramente os tópicos a serem estudados e as metas a serem alcançadas. Ele oferece um plano passo a passo, garantindo que você não perca informações cruciais e mantenha o progresso constante.
+      </p>
+      <p class="text-gray-50 mt-2 font-sans text-sm">
+        Além disso, um roadmap proporciona uma visão clara de onde você está e para onde está indo, aumentando a motivação e diminuindo o risco de se sentir perdido ou sobrecarregado. A clareza no caminho a ser percorrido ajuda a manter a disciplina e a confiança durante o processo de aprendizagem.
+      </p>
+      <p class="text-gray-50 mt-2 font-sans text-sm">
+        Em resumo, estudar com um roadmap é como ter um guia confiável que te leva ao sucesso de maneira organizada e eficiente. 🚀
+      </p>
+    </div>
+  </div>
 </ion-content>

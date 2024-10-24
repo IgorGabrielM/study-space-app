@@ -1,0 +1,19 @@
+<ion-accordion [value]="recurso.idResource">
+  <ion-item slot="header" color="light">
+    <ion-label class="font-bold">{{ recurso.title }}</ion-label>
+  </ion-item>
+  <div class="ion-padding" slot="content">
+    <ng-container *ngIf="recurso.children && recurso.children.length > 0">
+      <ion-accordion-group>
+        <ng-container *ngFor="let child of recurso.children">
+          <app-recurso-item [recurso]="child"></app-recurso-item>
+        </ng-container>
+      </ion-accordion-group>
+    </ng-container>
+    <ng-container *ngIf="!(recurso.children && recurso.children.length > 0)">
+      {{ recurso.description }}
+      <img *ngIf="qrCodeRecursoItem" [src]="qrCodeRecursoItem" alt="QR code do recurso" class="w-full mx-auto mt-3 border-t border-gray-400 pt-4" />
+      <a [href]="recurso.link" target="_blank" class="text-sm text-primary">{{ recurso.link }}</a>
+    </ng-container>
+  </div>
+</ion-accordion>
