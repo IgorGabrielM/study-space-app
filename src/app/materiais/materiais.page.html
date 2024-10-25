@@ -20,12 +20,6 @@
     </ion-segment-button>
   </ion-segment>
 
-<!--  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="scanQRCode()">
-      <ion-icon name="qr-code"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>-->
-
   <div *ngIf="valueSegment === 'Materiais'" class="w-full h-fit min-h-full flex bg-secondary">
     <div class="w-11/12 mx-auto mb-2">
       <div class="w-full h-fit flex flex-col gap-2">
@@ -67,7 +61,7 @@
               <span>Nenhum conteudo disponível...</span>
             </div>
 
-            <ion-accordion-group>
+            <ion-accordion-group class="flex flex-col gap-3">
               <ng-container *ngFor="let recurso of recursos">
                 <div class="border-2 border-primary rounded-xl px-2 py-2">
                   <app-recurso-item [recurso]="recurso" class="recurso"></app-recurso-item>

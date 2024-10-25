@@ -180,6 +180,7 @@ export class SignUpPage implements OnInit {
         ...this.user,
         idRole: 0,
         createdAt: new Date(),
+        password: undefined,
         interests: [
           0
         ],

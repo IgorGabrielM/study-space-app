@@ -38,7 +38,7 @@ export class UserPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.loadUser();''
+    this.loadUser();
     this.loadMedia()
   }
 

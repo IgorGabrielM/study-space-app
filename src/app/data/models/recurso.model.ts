@@ -4,4 +4,5 @@ export class RecursoModel {
     link?: string;
     description?: string;
     children: RecursoModel[]
+    imageUrl: string;
 }

@@ -1,6 +1,9 @@
 <ion-accordion [value]="recurso.idResource">
   <ion-item slot="header" color="light">
-    <ion-label class="font-bold">{{ recurso.title }}</ion-label>
+    <div>
+      <ion-label class="font-bold text-center">{{ recurso.title }}</ion-label>
+      <img *ngIf="recurso?.imageUrl" [src]="recurso.imageUrl" alt="Imagem do recurso" class="rounded-lg my-2 mx-auto">
+    </div>
   </ion-item>
   <div class="ion-padding" slot="content">
     <ng-container *ngIf="recurso.children && recurso.children.length > 0">

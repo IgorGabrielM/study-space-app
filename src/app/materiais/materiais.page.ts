@@ -29,18 +29,6 @@ export class MateriaisPage implements OnInit {
   loadMedia(){
     this.mediaService.list().then((res) => {
       this.materiais = res.reverse().filter((r) => r.type === 'Materiais');
-/*      this.mediaService.create({
-        "interestIds":[
-          1,
-        ],
-        "title":"Gamification, Inc",
-        "institution":"IDV",
-        "description":"A obra mostra que os apontamentos feitos pelo Gartner Group já estão se tornando realidade. Hoje, as técnicas de Gamificação têm sido aplicadas por empresas como ferramentas alternativas às abordagens tradicionais.",
-        "imageUrl":"https://m.media-amazon.com/images/I/71BmW6XqVWL._SL1332_.jpg",
-        "idUser":7,
-        "type":"Materiais",
-        "link": "https://encurtador.com.br/Fij3w",
-      }).then()*/
     })
   }
 
@@ -57,15 +45,6 @@ export class MateriaisPage implements OnInit {
         console.error(err);
       });
   }
-
-/*  async scanQRCode() {
-      BarcodeScanner.hideBackground(); // Tornar o fundo transparente
-      const result = await BarcodeScanner.startScan(); // Iniciar o scan
-
-      if (result.hasContent) {
-        alert('Scanned QR Code: ' + result.content);
-      }
-  }*/
 
   loadRecursos(){
     this.recursoService.list().then((res) => {
