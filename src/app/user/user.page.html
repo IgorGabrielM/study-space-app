@@ -12,17 +12,36 @@
   </ion-header>
 
   <div class="w-full h-fit flex justify-center bg-secondary pt-8">
-    <div class="text-white flex flex-col gap-2 items-center">
+    <div *ngIf="!user?.imageUrl || !user?.birthdate" class="h-screen">
+      <div class="w-full flex flex-col items-center justify-center mt-2">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+          alt="Imagem do usuário"
+          class="w-[150px] h-[150px] object-cover rounded-xl"
+        />
+        <span *ngIf="user?.name" class="font-bold text-2xl text-white mt-2">{{ user?.name }}</span>
+      </div>
+
+      <div class="w-full flex items-center justify-center text-red-500 mt-4">
+        <ion-icon name="alert-circle" class="text-xl mx-2"></ion-icon>
+        <span class="font-bold text-lg text-center">Seu usuário não esta completo...</span>
+        <ion-icon name="alert-circle" class="text-xl mx-2"></ion-icon>
+      </div>
+      <div class="w-full flex justify-center mt-1">
+        <ion-button (click)="completeUser()" color="danger" class="font-bold">Completar cadastro</ion-button>
+      </div>
+    </div>
+    <div *ngIf="!(!user?.imageUrl || !user?.birthdate)" class="text-white flex flex-col gap-2 items-center">
       <span [class]="'w-9/12 mx-auto text-end font-bold text-sm -mb-2 ' + textRankClass">{{ nameRank }}</span>
       <div class="relative">
         <img
-          *ngIf="user?.imageUrl.length > 0"
+          *ngIf="user?.imageUrl?.length > 0"
           [src]="user?.imageUrl"
           alt="Imagem do usuário"
           [class]="('w-[150px] h-[150px] object-cover rounded-xl border-4 ' + borderRankClass)"
         />
         <img
-          *ngIf="user?.imageUrl.length == 0"
+          *ngIf="user?.imageUrl?.length == 0"
           src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
           alt="Imagem do usuário"
           class="w-[150px] h-[150px] object-cover rounded-xl"
@@ -32,21 +51,12 @@
         </div>
       </div>
 
-      <span class="font-bold text-2xl text-primary">{{ user?.name }}</span>
-
-      <div class="flex gap-2">
-        <div
-          *ngFor="let interest of interests"
-          class="px-3 py-1 rounded-full bg-white bg-opacity-40"
-        >
-          <span class="font-bold uppercase">{{ interest.text }}</span>
-        </div>
-      </div>
+      <span *ngIf="user?.name" class="font-bold text-2xl text-primary">{{ user?.name }}</span>
     </div>
   </div>
 
 
-  <div class="w-full h-fit min-h-full bg-secondary pt-4 pb-20">
+  <div *ngIf="user?.bio" class="w-full h-fit min-h-full bg-secondary pt-4 pb-20">
     <div class="w-11/12 lg:w-3/5 mx-auto">
       <div class="w-full h-fit flex flex-col gap-2">
         <h3 class="text-xl text-white font-bold">Biografia</h3>
@@ -60,7 +70,7 @@
         <div class="w-full flex flex-col  justify-content-center gap-2 text-gray-400">
           <div class="mt-2 flex flex-col gap-2">
             <div *ngIf="cursos?.length === 0" class="text-white font-bold">
-              <span>Nenhum curso do usuário...</span>
+              <span class="text-gray-200 font-normal">Nenhum curso do usuário...</span>
             </div>
             <div *ngIf="cursos?.length > 0" class="flex flex-col gap-4">
               <div *ngFor="let curso of cursos" class="text-white border-2 p-4 rounded-md border-gray-400">
@@ -77,6 +87,9 @@
            class="w-full h-fit flex flex-col gap-3 mt-8">
         <span class="text-xl text-white font-bold">Últimos posts</span>
         <div class="w-full flex flex-col gap-5">
+          <div *ngIf="posts?.length === 0" class="text-white font-bold">
+            <span class="text-gray-200 font-normal">Nenhum post do usuário...</span>
+          </div>
           <app-card-post *ngFor="let post of user.posts" [post]="post"></app-card-post>
         </div>
       </div>

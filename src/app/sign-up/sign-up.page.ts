@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthModel, AuthService} from "../data/services/auth.service";
 import {UserModel} from "../data/models/user.model";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AlertController, LoadingController, ToastController} from "@ionic/angular";
 import {InterestModel} from "../data/models/interest.model";
 import {InterestService} from "../data/services/insterest.service";
@@ -19,6 +19,7 @@ export class SignUpPage implements OnInit {
   particles: any[] = [];
   particleCount = 100;
   interests: InterestModel[] = [];
+  idToEdit: number;
 
   constructor(
     private authService: AuthService,
@@ -28,11 +29,11 @@ export class SignUpPage implements OnInit {
     private imageService: ImageService,
     private loadingCtrl: LoadingController,
     private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.user = new UserModel()
-    //this.loadInterests();
+    this.loadUser();
 
     for (let i = 0; i < this.particleCount; i++) {
       this.particles.push({
@@ -52,6 +53,28 @@ export class SignUpPage implements OnInit {
     });
   }
 */
+
+  loadUser(){
+    this.route.queryParams.subscribe(async (params) => {
+      const id = params['id'];
+      this.idToEdit = id;
+      if (id){
+        this.user = new UserModel()
+        const loading = await this.loadingCtrl.create({
+          message: 'Carregando usuário...',
+        });
+        loading.present()
+        setTimeout(() => {
+          this.authService.find(id).then((usr) => {
+            this.user = {...usr, birthdate: new Date(usr.birthdate)}
+            loading.dismiss();
+          })
+        }, 500)
+      }else{
+        this.user = new UserModel()
+      }
+    });
+  }
 
 
   animateParticles() {
@@ -138,17 +161,33 @@ export class SignUpPage implements OnInit {
       message: 'Criando usuário. Por favor aguarde...',
     });
     loading.present()
-    this.authService.createUser({
-      ...this.user,
-      idRole: 0,
-      createdAt: new Date(),
-      interests: [
-        0
-      ],
-      posts: []
-    }).then((res) => {
-      loading.dismiss()
-      this.router.navigate(['../'])
-    })
+
+    if(!this.idToEdit){
+      this.authService.createUser({
+        ...this.user,
+        idRole: 0,
+        createdAt: new Date(),
+        interests: [
+          0
+        ],
+        posts: []
+      }).then((res) => {
+        loading.dismiss()
+        this.router.navigate(['../'])
+      })
+    }else {
+      this.authService.putUser({
+        ...this.user,
+        idRole: 0,
+        createdAt: new Date(),
+        interests: [
+          0
+        ],
+        posts: []
+      }).then((res) => {
+        loading.dismiss()
+        this.router.navigate(['/user'])
+      })
+    }
   }
 }

@@ -5,20 +5,21 @@
     <div class="h-fit pb-10 z-10">
       <ion-title class="text-4xl text-center font-bold text-white mb-6 font-sans">Criar conta</ion-title>
       <div class="w-11/12 mx-auto px-5 py-5 h-fit flex flex-col gap-2 rounded-md shadow-lg border border-primary bg-secondary">
-
-        <div (click)="selectImage()" class="border-2 border-primary bg-secondary w-52 h-52 rounded-full relative mx-auto flex justify-center items-center">
-          <ion-icon *ngIf="!user.imageUrl" name="person" class="text-9xl"></ion-icon>
-          <img *ngIf="user.imageUrl" [src]="user.imageUrl" class="w-full h-full rounded-full object-cover">
-          <div  class="absolute bg-primary bottom-5 right-2 w-8 h-8 rounded-full text-white flex justify-center ion-text-center">
-            <ion-icon name="pencil" class="text-lg mt-1.5"></ion-icon>
-          </div>
-        </div>
         <ion-input
           type="email"
           fill="solid"
           label="Email"
           labelPlacement="floating"
           [(ngModel)]="user.email"
+          class="custom"
+          required
+        ></ion-input>
+        <ion-input
+          type="text"
+          fill="solid"
+          label="Name"
+          labelPlacement="floating"
+          [(ngModel)]="user.name"
           class="custom"
           required
         ></ion-input>

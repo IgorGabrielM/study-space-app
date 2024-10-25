@@ -125,15 +125,7 @@ export class SignUpSimpilifyPage implements OnInit {
       message: 'Criando usuário. Por favor aguarde...',
     });
     loading.present()
-    this.authService.createUser({
-      ...this.user,
-      idRole: 0,
-      createdAt: new Date(),
-      interests: [
-        0
-      ],
-      posts: []
-    }).then((res) => {
+    this.authService.createUser(this.user).then((res) => {
       loading.dismiss()
       this.router.navigate(['../'])
     })

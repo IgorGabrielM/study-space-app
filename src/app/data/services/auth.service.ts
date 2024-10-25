@@ -25,7 +25,7 @@ export class AuthService {
 
   async putUser(payload: UserModel): Promise<void> {
     try {
-      const response = await this.http.put<UserModel>(`https://study-space-1beb84dc5047.herokuapp.com/users/${payload.idUser}`, payload).toPromise();
+      const response = await this.http.patch<UserModel>(`https://study-space-1beb84dc5047.herokuapp.com/users/${payload.idUser}`, payload).toPromise();
     } catch (error) {
       console.log(error);
     }

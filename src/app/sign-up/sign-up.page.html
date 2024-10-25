@@ -33,6 +33,7 @@
           required
         ></ion-input>
         <ion-input
+          *ngIf="!idToEdit"
           type="password"
           fill="solid"
           label="Senha"
@@ -75,7 +76,7 @@
         user.gender
         )" (click)="onSubmit()">
             <span class="font-bold text-white">
-              Criar
+              {{ idToEdit ? 'Editar' : 'Criar' }}
             </span>
         </ion-button>
       </div>

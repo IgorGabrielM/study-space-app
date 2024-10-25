@@ -7,6 +7,7 @@ import {MediaModel} from "../data/models/media.model";
 import {MediaService} from "../data/services/media.service";
 import {AuthService} from "../data/services/auth.service";
 import {InterestService} from "../data/services/insterest.service";
+import {LoadingController} from "@ionic/angular";
 
 @Component({
   selector: 'app-user',
@@ -28,7 +29,7 @@ export class UserPage implements OnInit {
     private interestService: InterestService,
     private authService: AuthService,
     private mediaService: MediaService,
-    private cdr: ChangeDetectorRef
+    private loadingCtrl: LoadingController,
   ) { }
 
   ngOnInit() {
@@ -36,7 +37,16 @@ export class UserPage implements OnInit {
     this.loadMedia();
   }
 
-  loadUser() {
+  ionViewWillEnter() {
+    this.loadUser();''
+    this.loadMedia()
+  }
+
+  async loadUser() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Carregando usuario. Por favor aguarde...',
+    });
+    loading.present()
     const userToken = localStorage.getItem('userId');
     this.authService.find(userToken).then(async (usr) => {
       this.user = usr;
@@ -55,6 +65,7 @@ export class UserPage implements OnInit {
 
       this.interests = await Promise.all(interestPromises);
       this.getRankClass();
+      loading.dismiss()
     })
   }
 
@@ -113,6 +124,8 @@ export class UserPage implements OnInit {
     }
   }
 
-
+  completeUser() {
+    this.router.navigate(['/sign-up'], {queryParams: {id: this.user.idUser}});
+  }
 
 }
